@@ -48,3 +48,7 @@ Cookie: Authorization=auth123123;
 {
     "replicas":5
 }
+
+
+### GET Without Body Demo3 test by RestClient of vscode extenstion
+GET http://127.0.0.1:9881/demo3/zhangsan?money=1000

@@ -23,7 +23,7 @@ func handlerDemo3(c *gin.Context) {
 
 	err = ginbinder.ShouldBindRequest(c, params)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, err)
+		c.String(http.StatusBadRequest, err.Error())
 		return
 	}
 

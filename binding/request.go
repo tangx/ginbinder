@@ -2,6 +2,7 @@ package binding
 
 import (
 	"errors"
+	"io"
 	"net/http"
 	"reflect"
 )
@@ -58,7 +59,12 @@ func (b requestBinding) BindOnly(obj interface{}, req *http.Request, uriMap map[
 		bb = Default(req.Method, contentType)
 	}
 
-	return bb.BindOnly(req, bodyObj)
+	err := bb.BindOnly(req, bodyObj)
+	if err == nil || err == io.EOF {
+		return nil
+	}
+
+	return err
 
 }
 
