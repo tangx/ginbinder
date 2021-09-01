@@ -5,6 +5,14 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
+# [0.1.1](https://github.com/tangx/ginbinder/compare/v0.1.0...v0.1.1)
+
+### Bug Fixes
+
+* **fix** 忽略 空 body io.EOF 错误 ([dc5d2d8](https://github.com/tangx/ginbinder/commit/dc5d2d85c007ce601de8e42a0a5cb2a5957d2b82))
+
+
+
 # [0.1.0](https://github.com/tangx/ginbinder/compare/v0.0.1...v0.1.0)
 
 ### Features
