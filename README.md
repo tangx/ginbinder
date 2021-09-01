@@ -4,6 +4,7 @@
 
 ![gopher-binding](docs/imgs/gopher-binding.jpeg)
 
+
 ## Usage
 
 1. **废弃/不可用**: 弃用原生 tag `form` tag。
@@ -19,6 +20,11 @@
     + `body` **只能有一个**
 7. **新增**: 新增 tag `mime` 在代码中 **指定** 解析器， 优先于 `content-type`。 `body` 的协同，无法单独使用。
     + `json`, `yaml`, `xml`, `form`
+
+## Bind and Bindonly
+
+1. `BindRequest` / `ShouldBindRequest` 强制进行参数有效性 `validate` 验证。
+2. `BindOnlyRequest` / `ShouldBindOnlyRequest` 不进行参数有效性 `validate` 验证。
 
 ### 按照 Request 结构管理参数
 
