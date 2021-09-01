@@ -40,17 +40,24 @@ func (b requestBinding) BindOnly(obj interface{}, req *http.Request, uriMap map[
 	}
 
 	// body decode
-	bodyObj := extractBody(obj)
+	mime, bodyObj := extractBody(obj)
 	if bodyObj == nil {
 		return nil
 	}
 
-	// default json
-	contentType := req.Header.Get("Content-Type")
-	if contentType == "" {
-		contentType = MIMEJSON
+	// get Binding base on mime tag first,
+	// if nil, use content-type default
+	bb := MimeBinding(mime)
+
+	if bb == nil {
+		// default json
+		contentType := req.Header.Get("Content-Type")
+		if contentType == "" {
+			contentType = MIMEJSON
+		}
+		bb = Default(req.Method, contentType)
 	}
-	bb := Default(req.Method, contentType)
+
 	return bb.BindOnly(req, bodyObj)
 
 }
@@ -61,19 +68,19 @@ func (b requestBinding) bindingQuery(req *http.Request, obj interface{}) error {
 }
 
 // extractBody return body object
-func extractBody(obj interface{}) interface{} {
+func extractBody(obj interface{}) (mime string, body interface{}) {
 
 	// pre-check obj
 	rv := reflect.ValueOf(obj)
 	rv = reflect.Indirect(rv)
 	if rv.Kind() != reflect.Struct {
-		return nil
+		return "", nil
 	}
 
 	return extract(rv)
 }
 
-func extract(rv reflect.Value) interface{} {
+func extract(rv reflect.Value) (mime string, body interface{}) {
 
 	typ := rv.Type()
 	for i := 0; i < rv.NumField(); i++ {
@@ -85,6 +92,8 @@ func extract(rv reflect.Value) interface{} {
 			continue
 		}
 
+		// get mime tag
+		mime := tf.Tag.Get("mime")
 		// find body struct
 		if reflect.Indirect(vf).Kind() == reflect.Struct {
 			// body must not has tag "query"
@@ -93,11 +102,11 @@ func extract(rv reflect.Value) interface{} {
 				panic(ErrInvalidTagInRequestBody)
 			}
 
-			return vf.Addr().Interface()
+			return mime, vf.Addr().Interface()
 		}
 	}
 
-	return nil
+	return mime, nil
 }
 
 func hasTag(rv reflect.Value, tag string) bool {
@@ -115,4 +124,17 @@ func hasTag(rv reflect.Value, tag string) bool {
 	}
 
 	return false
+}
+
+// MimeBinding returns the appropriate Binding instance based on mime value in body tag
+func MimeBinding(mime string) Binding {
+	switch mime {
+	case "json":
+		return JSON
+	case "xml":
+		return XML
+	case "yaml", "yml":
+		return YAML
+	}
+	return nil
 }

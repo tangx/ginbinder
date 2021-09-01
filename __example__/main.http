@@ -18,8 +18,29 @@ Cookie: Authorization=auth123123;
     "replicas":5
 }
 
+### GET  Demo2 test by RestClient of vscode extenstion
+GET http://127.0.0.1:9881/demo2/zhangsan/666?money=1000
+Content-Type: application/json
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6,zh-CN;q=0.4
+Cookie: Authorization=auth123123;
+
+{
+    "replicas":5
+}
+
 ### POST  Demo3 test by RestClient of vscode extenstion
 POST http://127.0.0.1:9881/demo3/zhangsan?money=1000
+Content-Type: application/json
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6,zh-CN;q=0.4
+Cookie: Authorization=auth123123;
+
+{
+    "replicas":5
+}
+
+
+### GET Demo3 test by RestClient of vscode extenstion
+GET http://127.0.0.1:9881/demo3/zhangsan?money=1000
 Content-Type: application/json
 Accept-Language: en-GB,en-US;q=0.8,en;q=0.6,zh-CN;q=0.4
 Cookie: Authorization=auth123123;

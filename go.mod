@@ -9,7 +9,6 @@ require (
 	github.com/golang/protobuf v1.5.2
 	github.com/json-iterator/go v1.1.11
 	github.com/stretchr/testify v1.7.0
-	github.com/tangx/ginbind v0.0.0-20210819003448-0d0b8efa1a23
 	github.com/ugorji/go/codec v1.2.6
 	gopkg.in/yaml.v2 v2.4.0
 )

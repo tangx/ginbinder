@@ -14,7 +14,7 @@ type paramsDemo3 struct {
 	}
 	BodyData struct {
 		Replicas *int32 `json:"replicas" yaml:"replicas" xml:"replicas" form:"replicas"`
-	} `body:"body"`
+	} `body:"body" mime:"json"`
 }
 
 func handlerDemo3(c *gin.Context) {
