@@ -17,6 +17,15 @@ func BindRequest(c *gin.Context, obj interface{}) error {
 	return nil
 }
 
+// BindOnlyRequest is BindRequest is without validate
+func BindOnlyRequest(c *gin.Context, obj interface{}) error {
+	if err := ShouldBindOnlyRequest(c, obj); err != nil {
+		c.AbortWithError(http.StatusBadRequest, err).SetType(gin.ErrorTypeBind)
+		return err
+	}
+	return nil
+}
+
 // ShouldBindRequest binds the passed struct pointer using the specified binding engine.
 //   including
 //     `uri`,
@@ -42,4 +51,14 @@ func ShouldBindRequest(c *gin.Context, obj interface{}) error {
 	}
 
 	return binding.Request.Bind(obj, c.Request, params)
+}
+
+// ShouldBindOnlyRequest is ShouldBindRequest is without validate
+func ShouldBindOnlyRequest(c *gin.Context, obj interface{}) error {
+	params := make(map[string][]string)
+	for _, v := range c.Params {
+		params[v.Key] = []string{v.Value}
+	}
+
+	return binding.Request.BindOnly(obj, c.Request, params)
 }
