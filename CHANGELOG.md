@@ -5,6 +5,14 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
+# [0.1.2](https://github.com/tangx/ginbinder/compare/v0.1.1...v0.1.2)
+
+### Bug Fixes
+
+* **fix** 增加 map body 支持 ([6dc79df](https://github.com/tangx/ginbinder/commit/6dc79df64e22417340b791cad5e814e06fede42b))
+
+
+
 # [0.1.1](https://github.com/tangx/ginbinder/compare/v0.1.0...v0.1.1)
 
 ### Bug Fixes
