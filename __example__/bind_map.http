@@ -1,0 +1,9 @@
+### POST Demo1 test by RestClient of vscode extenstion
+GET http://127.0.0.1:9881/map
+Content-Type: application/json
+
+{
+    "replicas":2,
+    "name":"zhangsan"
+
+}

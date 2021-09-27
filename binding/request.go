@@ -100,8 +100,10 @@ func extract(rv reflect.Value) (mime string, body interface{}) {
 
 		// get mime tag
 		mime := tf.Tag.Get("mime")
-		// find body struct
-		if reflect.Indirect(vf).Kind() == reflect.Struct {
+		// find body struct or map
+		if vf := reflect.Indirect(vf); vf.Kind() == reflect.Struct ||
+			vf.Kind() == reflect.Map {
+
 			// body must not has tag "query"
 			if hasTag(vf, "query") || hasTag(vf, "header") ||
 				hasTag(vf, "cookie") || hasTag(vf, "uri") {
@@ -110,6 +112,7 @@ func extract(rv reflect.Value) (mime string, body interface{}) {
 
 			return mime, vf.Addr().Interface()
 		}
+
 	}
 
 	return mime, nil

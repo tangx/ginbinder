@@ -12,5 +12,7 @@ func main() {
 	r.GET("/demo2/:name/:age", handlerDemo2)
 	r.POST("/demo3/:name", handlerDemo3)
 	r.GET("/demo3/:name", handlerDemo3)
+
+	r.GET("/map", handlerBindMapAsJson)
 	_ = r.Run(":9881")
 }

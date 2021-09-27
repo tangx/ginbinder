@@ -106,6 +106,29 @@ type Params3 struct {
 
 ![result-demo3](./docs/imgs/result-demo3.png)
 
+### 绑定 Json Body 到 map 中
+
+[/__example__/bind_map.go](/__example__/bind_map.go)
+
+注意， 如果 Data 的数据类型与传入不匹配， 将会引发 panic。
+
+```go
+type paramsMap struct {
+	Data map[string]interface{} `body:"body" mime:"json"`
+}
+
+func handlerBindMapAsJson(c *gin.Context) {
+	parmas := &paramsMap{}
+
+	err := ginbinder.ShouldBindRequest(c, parmas)
+	if err != nil {
+		panic(err)
+	}
+
+	c.JSON(200, parmas)
+}
+```
+
 ## exmaple
 
 Demo 参考 [exmaple](./__example__)
