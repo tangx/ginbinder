@@ -7,7 +7,7 @@ import (
 	"github.com/tangx/ginbinder"
 )
 
-type paramsDemo3 struct {
+type paramsJson struct {
 	Auth struct {
 		Name          string `uri:"name"`
 		Authorization string `cookie:"Authorization"`
@@ -17,9 +17,9 @@ type paramsDemo3 struct {
 	} `body:"body" mime:"json"`
 }
 
-func handlerDemo3(c *gin.Context) {
+func handlerJson(c *gin.Context) {
 	var err error
-	params := &paramsDemo3{}
+	params := &paramsJson{}
 
 	err = ginbinder.ShouldBindRequest(c, params)
 	if err != nil {

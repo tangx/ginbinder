@@ -27,7 +27,7 @@ type paramsDemo2 struct {
 	} `body:"body"`
 }
 
-func handlerDemo2(c *gin.Context) {
+func handlerStructNested(c *gin.Context) {
 	var err error
 	params := &paramsDemo2{}
 

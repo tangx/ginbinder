@@ -18,8 +18,14 @@
     + Body 数据的解析器通过 `content-type` 判断， 默认为 `Json`
     + Body 中的字段不能包含 `uri, query, cookie, header` 这些 tag， 否则会 panic。
     + `body` **只能有一个**
-7. **新增**: 新增 tag `mime` 在代码中 **指定** 解析器， 优先于 `content-type`。 `body` 的协同，无法单独使用。
-    + `json`, `yaml`, `xml`, `form`
+7. **新增**: 新增 tag `mime` 在代码中 **指定** 解析器， 优先于 **Request** 中的 `content-type`。 与 `body` 的协同，无法单独使用。
+    + `json`: `application/json`
+    + `yaml`: `application/x-yaml`
+    + `xml`: `application/xml`
+    + `form`: `form` 的行为逻辑 **必须** 依赖 request 中的 `Content-Type`。
+        + `application/octet-stream`: 默认， `net/http/request.go#L1212` 中定义。
+        + `application/x-www-form-urlencoded`: form 表单
+        + `multipart/form-data`: 多行数据
 
 ## Bind and Bindonly
 

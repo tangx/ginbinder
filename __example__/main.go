@@ -7,11 +7,13 @@ import (
 func main() {
 	r := gin.Default()
 
-	r.POST("/demo1/:name", handlerDemo1)
-	r.POST("/demo2/:name/:age", handlerDemo2)
-	r.GET("/demo2/:name/:age", handlerDemo2)
-	r.POST("/demo3/:name", handlerDemo3)
-	r.GET("/demo3/:name", handlerDemo3)
+	r.POST("/struct/request/:name", handlerStructRequest)
+	r.POST("/struct/nested/:name/:age", handlerStructNested)
+	r.GET("/struct/nested/:name/:age", handlerStructNested)
+	r.POST("/mime/json/:name", handlerJson)
+	r.GET("/mime/json/:name", handlerJson)
+	r.POST("/mime/postform/:name", handlePostForm)
+	r.GET("/mime/postform/:name", handlePostForm)
 
 	r.GET("/map", handlerBindMapAsJson)
 	_ = r.Run(":9881")

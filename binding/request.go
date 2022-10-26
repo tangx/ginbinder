@@ -144,6 +144,8 @@ func MimeBinding(mime string) Binding {
 		return XML
 	case "yaml", "yml":
 		return YAML
+	case "form":
+		return Form
 	}
 	return nil
 }

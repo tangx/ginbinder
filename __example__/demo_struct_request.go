@@ -14,11 +14,11 @@ type paramsDemo1 struct {
 	Authorization string `cookie:"Authorization"`
 	UserAgent     string `header:"User-Agent"`
 	Data          struct {
-		Replicas *int32 `json:"replicas" yaml:"replicas" xml:"replicas" form:"replicas"`
+		Replicas *int32 `json:"replicas" yaml:"replicas" xml:"replicas" form-urlencoded:"replicas"`
 	} `body:"body"`
 }
 
-func handlerDemo1(c *gin.Context) {
+func handlerStructRequest(c *gin.Context) {
 	var err error
 	params := &paramsDemo1{}
 
