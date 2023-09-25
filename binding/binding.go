@@ -83,6 +83,7 @@ var (
 	ProtoBuf      = protobufBinding{}
 	MsgPack       = msgpackBinding{}
 	YAML          = yamlBinding{}
+	Path          = pathBinding{}
 	Uri           = uriBinding{}
 	Header        = headerBinding{}
 	Request       = requestBinding{}

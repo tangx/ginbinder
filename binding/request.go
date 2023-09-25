@@ -29,6 +29,11 @@ func (b requestBinding) BindOnly(obj interface{}, req *http.Request, uriMap map[
 		return err
 	}
 
+	// 以 path 为主
+	if err := Path.BindOnly(uriMap, obj); err != nil {
+		return err
+	}
+
 	if err := b.bindingQuery(req, obj); err != nil {
 		return err
 	}

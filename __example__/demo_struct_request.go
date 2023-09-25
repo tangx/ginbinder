@@ -8,7 +8,7 @@ import (
 )
 
 type paramsDemo1 struct {
-	Name          string `uri:"name"`
+	Name          string `path:"name"`
 	Age           int    `query:"age,default=18"`
 	Money         int32  `query:"money" binding:"required"`
 	Authorization string `cookie:"Authorization"`
