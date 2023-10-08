@@ -109,10 +109,11 @@ func extract(rv reflect.Value) (mime string, body interface{}) {
 		if vf := reflect.Indirect(vf); vf.Kind() == reflect.Struct ||
 			vf.Kind() == reflect.Map {
 
-			// body must not has tag "query"
-			if hasTag(vf, "query") || hasTag(vf, "header") ||
-				hasTag(vf, "cookie") || hasTag(vf, "uri") {
-				panic(ErrInvalidTagInRequestBody)
+			// body MUST NOT include the following tags
+			for _, name := range []string{"query", "header", "cookie", "uri", "path"} {
+				if hasTag(vf, name) {
+					panic(ErrInvalidTagInRequestBody)
+				}
 			}
 
 			return mime, vf.Addr().Interface()
