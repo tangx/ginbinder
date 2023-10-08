@@ -7,10 +7,10 @@ import (
 	"github.com/tangx/ginbinder"
 )
 
-type paramsDemo2 struct {
-	Uris struct {
-		Name string `uri:"name"`
-		Age  int    `uri:"age"`
+type paramsNestedDemo struct {
+	Paths struct {
+		Name string `path:"name"`
+		Age  int    `path:"age"`
 	}
 	Queries struct {
 		Age   int   `query:"age,default=18"`
@@ -29,7 +29,7 @@ type paramsDemo2 struct {
 
 func handlerStructNested(c *gin.Context) {
 	var err error
-	params := &paramsDemo2{}
+	params := &paramsNestedDemo{}
 
 	err = ginbinder.ShouldBindRequest(c, params)
 	if err != nil {

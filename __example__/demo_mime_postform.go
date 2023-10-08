@@ -9,7 +9,7 @@ import (
 
 type paramsPostFrom struct {
 	Auth struct {
-		Name          string `uri:"name"`
+		Name          string `path:"name"`
 		Authorization string `cookie:"Authorization"`
 	}
 	BodyData struct {
