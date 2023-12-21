@@ -13,9 +13,22 @@ type paramsDemo1 struct {
 	Money         int32  `query:"money" binding:"required"`
 	Authorization string `cookie:"Authorization"`
 	UserAgent     string `header:"User-Agent"`
-	Data          struct {
-		Replicas *int32 `json:"replicas" yaml:"replicas" xml:"replicas" form-urlencoded:"replicas"`
-	} `body:"body"`
+	Data          Data   `body:"body"` // Data **不能** 指针类型
+}
+
+type Data struct {
+	Replicas *int32   `json:"replicas" yaml:"replicas" xml:"replicas" form-urlencoded:"replicas"`
+	Students Students `json:"students"`
+}
+
+type Students struct {
+	Zhangsan Student `json:"zhangsan"`
+	Lisi     Student `json:"lisi`
+}
+
+type Student struct {
+	Name string `json:"name"`
+	Age  int    `json:"age"`
 }
 
 func handlerStructRequest(c *gin.Context) {

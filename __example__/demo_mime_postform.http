@@ -1,0 +1,9 @@
+
+
+
+
+### POST form
+POST http://127.0.0.1:9881/mime/postform/zhangsan?money=1000
+Content-Type: application/x-www-form-urlencoded
+
+replicas=102&resourceId=acs%3Acms%3A%3A5719900881055885%3Acontact%2FADD-DevOps&product=CloudMonitor&ver=1.0&instanceName=ADD-DevOps&level=INFO&groupId=&eventType=Alert&userId=5719900881055885&content=%7B%22param%22%3A%7B%7D%2C%22source%22%3A%22unknown%22%2C%22detail%22%3A%7B%22ruleName%22%3A%22xxxxxx%22%2C%22title%22%3A%22yyyyyyy%22%2C%22message%22%3A%22zzzzzz%22%7D%7D&regionId=cn-hangzhou&eventTime=20221026T114505.863%2B0800&name=AlertWebHook&ruleName=SYS_EVENT_CloudMonitor_AlertWebHook&id=c1cda5a2-4bcd-466d-a628-0321ff750dcf&status=Alarm

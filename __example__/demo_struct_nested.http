@@ -1,0 +1,24 @@
+### POST  struct/nested test by RestClient of vscode extenstion
+POST http://127.0.0.1:9881/struct/nested/zhangsan/666?money=1000
+Content-Type: application/json
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6,zh-CN;q=0.4
+Cookie: Authorization=auth123123;
+
+{
+    "replicas":5
+}
+
+
+### GET struct/nested test by RestClient of vscode extenstion
+### GET 请求的特殊性
+##### 1. 在 server 端没有默认指定 body 读取方式的时候。 通常会以 JSON 方式读取。
+##### 2. 但是 GET 请求则必须使用 Form 方式。
+##### 继承自 gin/binding/binding.go， Default() 函数中是这样规定的
+GET http://127.0.0.1:9881/struct/nested/zhangsan/666?money=1000
+Content-Type: application/json
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6,zh-CN;q=0.4
+Cookie: Authorization=auth123123;
+
+{
+    "replicas":5
+}

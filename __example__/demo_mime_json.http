@@ -1,0 +1,28 @@
+### POST  mime/json test by RestClient of vscode extenstion
+POST http://127.0.0.1:9881/mime/json/zhangsan?money=1000
+Content-Type: application/json
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6,zh-CN;q=0.4
+Cookie: Authorization=auth123123;
+
+{
+    "replicas":5
+}
+
+
+### GET mime/json test by RestClient of vscode extenstion
+GET http://127.0.0.1:9881/mime/json/zhangsan?money=1000
+# Content-Type: application/json
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6,zh-CN;q=0.4
+Cookie: Authorization=auth123123;
+
+{
+    "replicas":5
+}
+
+
+
+
+### GET Without Body mime/json test by RestClient of vscode extenstion
+GET http://127.0.0.1:9881/mime/json/zhangsan?money=1000
+
+

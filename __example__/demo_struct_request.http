@@ -1,0 +1,15 @@
+### POST struct/request test by RestClient of vscode extenstion
+POST http://127.0.0.1:9881/struct/request/zhangsan?money=1000
+Content-Type: application/json
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6,zh-CN;q=0.4
+Cookie: Authorization=auth123123;
+
+{
+    "replicas": 5,
+    "students": {
+        "zhangsan": {
+            "name": "zhangsan",
+            "age": 18
+        }
+    }
+}
