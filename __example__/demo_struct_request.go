@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+	"io"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -41,5 +43,18 @@ func handlerStructRequest(c *gin.Context) {
 		return
 	}
 
+	// cc := c.Copy()
+	multipleReadBody(c)
 	c.JSON(200, params)
+}
+
+func multipleReadBody(c *gin.Context) {
+
+	b, err := io.ReadAll(c.Request.Body)
+	if err != nil {
+		panic(err)
+	}
+	defer c.Request.Body.Close()
+
+	fmt.Printf("Multiple Read Body: %s\n", b)
 }

@@ -1,6 +1,7 @@
 package binding
 
 import (
+	"bytes"
 	"errors"
 	"io"
 	"net/http"
@@ -23,7 +24,33 @@ func (b requestBinding) Bind(obj interface{}, req *http.Request, form map[string
 	return validate(obj)
 }
 
+// requestClone to clone request as a new one, so that we can read data multiple times
+// https://stackoverflow.com/a/62017757
+func requestClone(r *http.Request) (*http.Request, error) {
+	body, err := io.ReadAll(r.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	r2 := r.Clone(r.Context())
+	r.Body = io.NopCloser(bytes.NewBuffer(body))
+	r2.Body = io.NopCloser(bytes.NewBuffer(body))
+
+	err = r.ParseForm()
+	if err != nil {
+		return nil, err
+	}
+
+	return r2, nil
+}
+
 func (b requestBinding) BindOnly(obj interface{}, req *http.Request, uriMap map[string][]string) error {
+
+	// r2 := req.Clone(req.Context())
+	req, err := requestClone(req)
+	if err != nil {
+		return err
+	}
 
 	if err := Uri.BindOnly(uriMap, obj); err != nil {
 		return err
@@ -64,7 +91,7 @@ func (b requestBinding) BindOnly(obj interface{}, req *http.Request, uriMap map[
 		bb = Default(req.Method, contentType)
 	}
 
-	err := bb.BindOnly(req, bodyObj)
+	err = bb.BindOnly(req, bodyObj)
 	if err == nil || err == io.EOF {
 		return nil
 	}
